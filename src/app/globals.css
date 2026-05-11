@@ -42,7 +42,7 @@
   /* Layout */
   --content-max-width: 72rem; /* main content width (Tailwind 6xl); change here to affect all sections */
   --content-wide-max-width: 90rem; /* 22.5rem */
-  --navbar-height: 5rem;
+  --navbar-height: 3.5rem;
   --footer-height: 4.5rem;
   --feature-card-min-height: 12rem;
   --split-media-min-height: 15rem;
@@ -92,11 +92,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-primary), Arial, Helvetica, sans-serif;
+  overflow-x: clip;
 }
 
-/* Always reserve scrollbar space so layout is consistent when navigating between scrolling and non-scrolling pages */
 html {
-  scrollbar-gutter: stable;
+  overflow-x: clip;
 }
 
 /* Custom component classes using @apply */

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Sulphur_Point } from "next/font/google";
 import "./globals.css";
 import "../styles/button-gradient.css";
+import { Navbar } from "@/components/navigation/navbar";
 
 const geistSans = Sulphur_Point({
   variable: "--font-primary",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>
