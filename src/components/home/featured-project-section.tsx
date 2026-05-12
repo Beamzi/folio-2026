@@ -1,0 +1,177 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import {
+  LuBookOpen,
+  LuChartBar,
+  LuFilePenLine,
+  LuRocket,
+} from "react-icons/lu";
+import { homeContent } from "@/data/pages/home";
+
+const featureFlowIcons = [
+  LuBookOpen,
+  LuFilePenLine,
+  LuChartBar,
+  LuRocket,
+] as const;
+
+export function FeaturedProjectSection() {
+  const { featuredProject } = homeContent.featuresSection;
+  const [activeFeatureIndex, setActiveFeatureIndex] = useState<number | null>(
+    null,
+  );
+  const activeFeature =
+    activeFeatureIndex === null
+      ? null
+      : featuredProject.featureFlow[activeFeatureIndex];
+
+  return (
+    <article className="flex h-full w-full flex-col justify-center gap-[var(--spacing-md)] rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-md)]">
+      <p>
+        <span className="inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--color-primary)]">
+          {featuredProject.label}
+        </span>
+      </p>
+      <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-xl)]">
+        <ul className="flex flex-col items-center md:flex-row md:justify-center">
+          {featuredProject.featureFlow.map((item, index) => {
+            const Icon = featureFlowIcons[index];
+            const isActive = index === activeFeatureIndex;
+
+            return (
+              <Fragment key={item.title}>
+                <li className="relative flex items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveFeatureIndex((currentIndex) =>
+                        currentIndex === index ? null : index,
+                      )
+                    }
+                    aria-pressed={isActive}
+                    aria-label={item.title}
+                    className={`flex min-h-[calc(var(--spacing-xl)+var(--spacing-xl))] min-w-[calc(var(--spacing-xl)+var(--spacing-xl))] shrink-0 flex-col items-center justify-center gap-[var(--spacing-xs)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-sm)] text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] ${isActive ? "border-[var(--color-primary)]" : ""}`}
+                  >
+                    <span className="flex h-[calc(var(--spacing-xl)+var(--spacing-xs))] w-[calc(var(--spacing-xl)+var(--spacing-xs))] items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--background)] text-[var(--color-primary)]">
+                      <Icon
+                        className="h-[var(--spacing-md)] w-[var(--spacing-md)]"
+                        aria-hidden="true"
+                      />
+                    </span>
+                    <span className="text-[var(--foreground)]">{item.title}</span>
+                  </button>
+                </li>
+                {index < featuredProject.featureFlow.length - 1 ? (
+                  <>
+                    <li className="h-[var(--spacing-sm)] w-px shrink-0 md:hidden">
+                      <svg
+                        className="h-[var(--spacing-sm)] w-px text-[var(--color-border)]"
+                        viewBox="0 0 1 100"
+                        preserveAspectRatio="none"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <line
+                          x1="0.5"
+                          y1="0"
+                          x2="0.5"
+                          y2="100"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                        />
+                      </svg>
+                    </li>
+                    <li className="hidden h-px w-[var(--spacing-md)] shrink-0 md:block">
+                      <svg
+                        className="h-px w-full text-[var(--color-border)]"
+                        viewBox="0 0 100 1"
+                        preserveAspectRatio="none"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <line
+                          x1="0"
+                          y1="0.5"
+                          x2="100"
+                          y2="0.5"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                        />
+                      </svg>
+                    </li>
+                  </>
+                ) : null}
+              </Fragment>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="h-[clamp(calc(var(--feature-card-min-height)*1.5),42dvh,calc(var(--feature-card-min-height)*2.25))]">
+        {activeFeature ? (
+          <div className="flex h-full flex-col gap-[var(--spacing-sm)] md:flex-row md:items-stretch">
+            <div className="flex h-full flex-1 flex-col rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-sm)]">
+              <h3 className="mb-[var(--spacing-xs)] font-semibold text-[var(--foreground)]">
+                {activeFeature.content.title}
+              </h3>
+              <p className="mb-[var(--spacing-sm)] text-[var(--foreground)]">
+                {activeFeature.content.summary}
+              </p>
+              <ul className="mb-[var(--spacing-sm)] flex flex-wrap gap-[var(--spacing-xs)]">
+                {activeFeature.content.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)]"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={activeFeature.content.href}
+                className="mt-auto inline-flex w-fit rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--color-primary)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[var(--foreground)] transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+              >
+                {activeFeature.content.ctaLabel}
+              </Link>
+            </div>
+            <div className="relative h-[calc(var(--feature-card-min-height)*1.5)] flex-1 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] md:h-full">
+              <Image
+                src={activeFeature.imagePath}
+                alt={activeFeature.imageAlt}
+                fill
+                className="object-contain p-[var(--spacing-md)]"
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="flex h-full flex-col rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-sm)]">
+            <h3 className="mb-[var(--spacing-xs)] font-semibold text-[var(--foreground)]">
+              {featuredProject.title}
+            </h3>
+            <p className="mb-[var(--spacing-sm)] text-[var(--foreground)]">
+              {featuredProject.summary}
+            </p>
+            <ul className="mb-[var(--spacing-sm)] flex flex-wrap gap-[var(--spacing-xs)]">
+              {featuredProject.tags.map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)]"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={featuredProject.href}
+              className="mt-auto inline-flex w-fit rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--color-primary)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[var(--foreground)] transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            >
+              {featuredProject.ctaLabel}
+            </Link>
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}
