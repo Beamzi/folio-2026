@@ -23,6 +23,8 @@ export function FeaturedProjectSection() {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState<number | null>(
     null,
   );
+  const summaryClassName =
+    "mb-[var(--spacing-sm)] max-h-[calc(var(--spacing-xl)*2)] overflow-y-auto pr-[var(--spacing-xs)] text-[var(--foreground)]";
   const activeFeature =
     activeFeatureIndex === null
       ? null
@@ -35,7 +37,7 @@ export function FeaturedProjectSection() {
           {featuredProject.label}
         </span>
       </p>
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-xl)]">
+      <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)]">
         <ul className="flex flex-col items-center md:flex-row md:justify-center">
           {featuredProject.featureFlow.map((item, index) => {
             const Icon = featureFlowIcons[index];
@@ -53,7 +55,7 @@ export function FeaturedProjectSection() {
                     }
                     aria-pressed={isActive}
                     aria-label={item.title}
-                    className={`flex min-h-[calc(var(--spacing-xl)+var(--spacing-xl))] min-w-[calc(var(--spacing-xl)+var(--spacing-xl))] shrink-0 flex-col items-center justify-center gap-[var(--spacing-xs)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-sm)] text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] ${isActive ? "border-[var(--color-primary)]" : ""}`}
+                    className={`flex cursor-pointer min-h-[calc(var(--spacing-xl)+var(--spacing-xl))] w-full shrink-0 flex-col items-center justify-center gap-[var(--spacing-xs)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[calc(var(--spacing-xs)*1.5)] py-[calc(var(--spacing-xs)*2)] text-[var(--foreground)] transition-colors hover:bg-[var(--background)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] md:min-w-[calc(var(--content-max-width)/6)] ${isActive ? "border-[var(--color-primary)]" : ""}`}
                   >
                     <span className="flex h-[calc(var(--spacing-xl)+var(--spacing-xs))] w-[calc(var(--spacing-xl)+var(--spacing-xs))] items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--background)] text-[var(--color-primary)]">
                       <Icon
@@ -61,7 +63,9 @@ export function FeaturedProjectSection() {
                         aria-hidden="true"
                       />
                     </span>
-                    <span className="text-[var(--foreground)]">{item.title}</span>
+                    <span className="text-[var(--foreground)]">
+                      {item.title}
+                    </span>
                   </button>
                 </li>
                 {index < featuredProject.featureFlow.length - 1 ? (
@@ -116,14 +120,14 @@ export function FeaturedProjectSection() {
               <h3 className="mb-[var(--spacing-xs)] font-semibold text-[var(--foreground)]">
                 {activeFeature.content.title}
               </h3>
-              <p className="mb-[var(--spacing-sm)] text-[var(--foreground)]">
+              <p className={summaryClassName}>
                 {activeFeature.content.summary}
               </p>
               <ul className="mb-[var(--spacing-sm)] flex flex-wrap gap-[var(--spacing-xs)]">
                 {activeFeature.content.tags.map((tag) => (
                   <li
                     key={tag}
-                    className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)]"
+                    className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[calc(var(--spacing-xs)*0.75)] py-[calc(var(--spacing-xs)*0.5)] text-[var(--foreground)]"
                   >
                     {tag}
                   </li>
@@ -150,14 +154,12 @@ export function FeaturedProjectSection() {
             <h3 className="mb-[var(--spacing-xs)] font-semibold text-[var(--foreground)]">
               {featuredProject.title}
             </h3>
-            <p className="mb-[var(--spacing-sm)] text-[var(--foreground)]">
-              {featuredProject.summary}
-            </p>
+            <p className={summaryClassName}>{featuredProject.summary}</p>
             <ul className="mb-[var(--spacing-sm)] flex flex-wrap gap-[var(--spacing-xs)]">
               {featuredProject.tags.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)]"
+                  className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[calc(var(--spacing-xs)*0.75)] py-[calc(var(--spacing-xs)*0.5)] text-[var(--foreground)]"
                 >
                   {tag}
                 </li>

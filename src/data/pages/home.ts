@@ -6,62 +6,62 @@ export const homeContent = {
       "A quick look at the work I am most proud of, plus smaller builds I keep shipping in between.",
     featuredProject: {
       label: "Featured Project",
-      title: "Portfolio CMS + Case Study Engine",
+      title: "Orcha",
       summary:
-        "A flexible portfolio builder with reusable page blocks, rich media support, and authoring tools for writing structured case studies quickly.",
+        "Orcha wraps locally-run AI models in the infrastructure they're missing. Persistent memory, context injection, live web search, and streaming responses — everything a frontier app offers, running entirely on your machine.",
       featureFlow: [
         {
           icon: "library",
-          title: "Project Library",
+          title: "Context Injection",
           imagePath: "/globe.svg",
           imageAlt: "Project library feature preview",
           content: {
-            title: "Project Library",
+            title: "The foundation everything else builds on",
             summary:
-              "Browse all projects in one place with reusable content blocks and connected media assets.",
-            tags: ["Collections", "Media", "Reusable Blocks"],
+              "Chat history is merged from server and client state, formatted to Ollama's spec, and injected into every request. The model knows what was said earlier in the conversation because you tell it — every time.",
+            tags: ["Context Management", "State Architecture", "Ollama API"],
             href: "#",
             ctaLabel: "View library feature",
           },
         },
         {
           icon: "write",
-          title: "Case Study Editor",
+          title: "Persistent Memory",
           imagePath: "/file.svg",
           imageAlt: "Case study editor feature preview",
           content: {
-            title: "Case Study Editor",
+            title: "Conversations that survive the session",
             summary:
-              "Write structured project stories faster with guided sections, templates, and inline media placement.",
-            tags: ["Editor", "Templates", "Publishing"],
+              "Chat instances are created atomically with their first message and saved to the database. History reloads into context on return so conversations stay coherent across sessions. Close the app, come back, pick up where you left off.",
+            tags: ["PostgreSQL", "Prisma ORM", "Session Stat"],
             href: "#",
             ctaLabel: "View editor feature",
           },
         },
         {
           icon: "insights",
-          title: "Performance Insights",
+          title: "Live Data & Search",
           imagePath: "/window.svg",
           imageAlt: "Performance insights feature preview",
           content: {
-            title: "Performance Insights",
+            title: "Your local model, connected to now",
             summary:
-              "Understand what work resonates with visitors through lightweight metrics and clear engagement trends.",
-            tags: ["Analytics", "Traffic", "Engagement"],
+              "Brave Search API pulls real-time results and injects them into model context before each response. Questions about recent events, things that happened last week — answered accurately by a model running entirely on your hardware.",
+            tags: ["Brave Search API", "RAG", "Real-Time Data"],
             href: "#",
             ctaLabel: "View insights feature",
           },
         },
         {
           icon: "publish",
-          title: "One-Click Publishing",
+          title: "Streaming Response",
           imagePath: "/vercel.svg",
           imageAlt: "One-click publishing feature preview",
           content: {
-            title: "One-Click Publishing",
+            title: "Output that feels instant",
             summary:
-              "Push updates across portfolio pages quickly with a streamlined publish flow and preview controls.",
-            tags: ["Deployment", "Preview", "Sync"],
+              "Responses stream token by token with optimistic UI updates. Temporary IDs allow state to update mid-stream and reconcile against the database on completion — without blocking the interface or waiting on the server.",
+            tags: ["Streaming", "Optimistic UI", "State Reconciliatio"],
             href: "#",
             ctaLabel: "View publishing feature",
           },
@@ -69,7 +69,14 @@ export const homeContent = {
       ],
       href: "#",
       ctaLabel: "View featured project",
-      tags: ["Next.js", "TypeScript", "Headless CMS"],
+      tags: [
+        "TypeScript",
+        "React",
+        "Tailwind",
+        "Next.js",
+        "Prisma",
+        "PostgreSQL",
+      ],
     },
     secondProject: {
       label: "Second Project",

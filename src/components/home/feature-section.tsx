@@ -7,7 +7,7 @@ export function FeatureSection() {
   return (
     <section className="bg-[var(--background)] px-[var(--spacing-sm)] pb-[var(--spacing-lg)]">
       <div className="mx-auto w-full max-w-[var(--content-max-width)]">
-        <div className="flex h-[calc(100dvh-var(--navbar-height))] items-center py-[var(--spacing-xl)]">
+        <div className="flex items-center py-[var(--spacing-xl)] md:h-[calc(100dvh-var(--navbar-height))]">
           <FeaturedProjectSection />
         </div>
         <div className="grid gap-[var(--spacing-md)]">
