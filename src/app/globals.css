@@ -9,7 +9,7 @@
   /* Colors */
   --color-primary: #a1bf36;
   --color-secondary: #1261a6;
-  --color-muted: #9ca3af;
+  --color-muted: #737373;
   --color-border: #e5e7eb;
   --color-border-dashed: #bab9b9; /* neutral-600 for dashed lines in light mode */
   --color-error: #ef4444;
@@ -82,7 +82,7 @@
     --color-border-dashed: var(
       --color-border
     ); /* dashed lines match border in dark mode */
-    --color-muted: #52525b;
+    --color-muted: #a3a3a3;
     /* primary comes from :root so your brand color applies in dark mode too */
     --border: 1px solid #404040; /* neutral-700 for dark mode */
   }

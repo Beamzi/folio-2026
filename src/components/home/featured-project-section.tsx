@@ -1,48 +1,87 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import {
+  LuArrowLeft,
   LuBookOpen,
   LuChartBar,
+  LuDatabaseZap,
   LuFilePenLine,
+  LuGithub,
+  LuGlobe,
+  LuMessageSquareReply,
+  LuPlay,
+  LuRefreshCcw,
   LuRocket,
+  LuSplit,
 } from "react-icons/lu";
+import { ImagePreviewModal } from "@/components/home/image-preview-modal";
+import { ProjectCtaButton } from "@/components/home/project-cta-button";
 import { homeContent } from "@/data/pages/home";
 
 const featureFlowIcons = [
-  LuBookOpen,
-  LuFilePenLine,
-  LuChartBar,
-  LuRocket,
+  LuRefreshCcw,
+  LuDatabaseZap,
+  LuGlobe,
+  LuSplit,
 ] as const;
 
 export function FeaturedProjectSection() {
-  const { featuredProject } = homeContent.featuresSection;
+  const { featuredProject, uiLabels } = homeContent.featuresSection;
+  const repositoryHref =
+    featuredProject.socialLinks[0]?.href ?? featuredProject.href;
   const [activeFeatureIndex, setActiveFeatureIndex] = useState<number | null>(
     null,
   );
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const summaryClassName =
-    "mb-[var(--spacing-sm)] max-h-[calc(var(--spacing-xl)*2)] overflow-y-auto pr-[var(--spacing-xs)] text-[var(--foreground)]";
+    "mb-[var(--spacing-xs)] max-h-[calc(var(--spacing-xl)*2)] overflow-y-auto pr-[var(--spacing-xs)] text-[var(--foreground)]";
   const activeFeature =
     activeFeatureIndex === null
       ? null
       : featuredProject.featureFlow[activeFeatureIndex];
-
+  const previewImagePath =
+    activeFeature?.imagePath ?? featuredProject.featureFlow[0]?.imagePath ?? "";
+  const previewImageAlt =
+    activeFeature?.imageAlt ?? featuredProject.featureFlow[0]?.imageAlt ?? "";
   return (
     <article className="flex h-full w-full flex-col justify-center gap-[var(--spacing-md)] rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-md)]">
-      <p>
-        <span className="inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--color-primary)]">
-          {featuredProject.label}
-        </span>
-      </p>
+      <div className="flex items-center justify-between gap-[var(--spacing-sm)]">
+        <div className="flex items-center gap-[var(--spacing-xs)]">
+          <span className="inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--color-primary)]">
+            {featuredProject.label}
+          </span>
+          <span className="inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)]">
+            {featuredProject.title}
+          </span>
+        </div>
+        <div className="flex items-center gap-[var(--spacing-xs)]">
+          <Link
+            href={featuredProject.socialLinks[0].href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={featuredProject.socialLinks[0].label}
+            className="inline-flex rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-xs)] text-[var(--foreground)] transition-colors hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+          >
+            <LuGithub className="h-[var(--spacing-sm)] w-[var(--spacing-sm)]" />
+          </Link>
+          <Link
+            href={featuredProject.socialLinks[1].href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={featuredProject.socialLinks[1].label}
+            className="inline-flex rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-xs)] text-[var(--foreground)] transition-colors hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+          >
+            <LuPlay className="h-[var(--spacing-sm)] w-[var(--spacing-sm)]" />
+          </Link>
+        </div>
+      </div>
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)]">
         <ul className="flex flex-col items-center md:flex-row md:justify-center">
           {featuredProject.featureFlow.map((item, index) => {
             const Icon = featureFlowIcons[index];
             const isActive = index === activeFeatureIndex;
-
             return (
               <Fragment key={item.title}>
                 <li className="relative flex items-center justify-center">
@@ -127,27 +166,34 @@ export function FeaturedProjectSection() {
                 {activeFeature.content.tags.map((tag) => (
                   <li
                     key={tag}
-                    className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[calc(var(--spacing-xs)*0.75)] py-[calc(var(--spacing-xs)*0.5)] text-[var(--foreground)]"
+                    className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[calc(var(--spacing-xs)*0.75)] py-[calc(var(--spacing-xs)*0.5)] text-[var(--color-muted)]"
                   >
                     {tag}
                   </li>
                 ))}
               </ul>
-              <Link
-                href={activeFeature.content.href}
-                className="mt-auto inline-flex w-fit rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--color-primary)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[var(--foreground)] transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
-              >
-                {activeFeature.content.ctaLabel}
-              </Link>
+              <ProjectCtaButton
+                onClick={() => setActiveFeatureIndex(null)}
+                label={activeFeature.content.ctaLabel}
+                icon={LuArrowLeft}
+                className="mt-auto"
+              />
             </div>
-            <div className="relative h-[calc(var(--feature-card-min-height)*1.5)] flex-1 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] md:h-full">
+            <button
+              type="button"
+              onClick={() => setIsPreviewOpen(true)}
+              aria-label={uiLabels.openImageLabel}
+              className="relative cursor-pointer h-[calc(var(--feature-card-min-height)*1.5)] flex-1 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] md:h-full"
+            >
               <Image
                 src={activeFeature.imagePath}
                 alt={activeFeature.imageAlt}
                 fill
-                className="object-contain p-[var(--spacing-md)]"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover object-left"
               />
-            </div>
+              <div className="vignette-overlay pointer-events-none absolute inset-0" />
+            </button>
           </div>
         ) : (
           <div className="flex h-full flex-col rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-sm)]">
@@ -159,21 +205,29 @@ export function FeaturedProjectSection() {
               {featuredProject.tags.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[calc(var(--spacing-xs)*0.75)] py-[calc(var(--spacing-xs)*0.5)] text-[var(--foreground)]"
+                  className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-transparent px-[calc(var(--spacing-xs)*0.75)] py-[calc(var(--spacing-xs)*0.5)] text-[var(--color-muted)]"
                 >
                   {tag}
                 </li>
               ))}
             </ul>
-            <Link
-              href={featuredProject.href}
-              className="mt-auto inline-flex w-fit rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--color-primary)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[var(--foreground)] transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
-            >
-              {featuredProject.ctaLabel}
-            </Link>
+            <ProjectCtaButton
+              href={repositoryHref}
+              external
+              label={featuredProject.ctaLabel}
+              icon={LuGithub}
+              className="mt-auto"
+            />
           </div>
         )}
       </div>
+      <ImagePreviewModal
+        isOpen={isPreviewOpen}
+        imagePath={previewImagePath}
+        imageAlt={previewImageAlt}
+        closeLabel={uiLabels.closeImageLabel}
+        onClose={() => setIsPreviewOpen(false)}
+      />
     </article>
   );
 }

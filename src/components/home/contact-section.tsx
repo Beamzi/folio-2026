@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  LuGithub,
-  LuGlobe,
-  LuMail,
-  LuMapPin,
-  LuPhone,
-} from "react-icons/lu";
+import { LuGithub, LuGlobe, LuMail, LuMapPin, LuPhone } from "react-icons/lu";
 import type { IconType } from "react-icons";
 import { homeContent } from "@/data/pages/home";
 
@@ -15,13 +9,13 @@ interface ContactSectionProps {
 
 export function ContactSection({ showLabel = true }: ContactSectionProps) {
   const { contactSection } = homeContent.featuresSection;
-  const contactIcons: Record<string, IconType> = {
-    mapPin: LuMapPin,
-    phone: LuPhone,
-    mail: LuMail,
-    globe: LuGlobe,
-    github: LuGithub,
-  };
+  const contactIcons: IconType[] = [
+    LuMapPin,
+    LuPhone,
+    LuMail,
+    LuGlobe,
+    LuGithub,
+  ];
 
   return (
     <article className="flex h-full w-full flex-col gap-[var(--spacing-md)] rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-md)]">
@@ -39,7 +33,7 @@ export function ContactSection({ showLabel = true }: ContactSectionProps) {
         <p className="text-[var(--foreground)]">{contactSection.subtitle}</p>
       </div>
       <ul className="grid gap-[var(--spacing-sm)] md:grid-cols-2">
-        {contactSection.details.map((detail) => (
+        {contactSection.details.map((detail, index) => (
           <li
             key={detail.label}
             className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)]"
@@ -47,7 +41,7 @@ export function ContactSection({ showLabel = true }: ContactSectionProps) {
             <div className="mb-[var(--spacing-xs)] flex items-center gap-[var(--spacing-xs)]">
               <span className="flex shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--background)] p-[var(--spacing-xs)] text-[var(--color-primary)]">
                 {(() => {
-                  const Icon = contactIcons[detail.icon];
+                  const Icon = contactIcons[index];
 
                   return Icon ? (
                     <Icon

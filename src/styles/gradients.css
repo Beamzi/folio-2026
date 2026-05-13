@@ -1,0 +1,11 @@
+:root {
+  --gradient-vignette-soft: radial-gradient(
+    circle at center,
+    transparent 42%,
+    rgb(0 0 0 / 0.38) 100%
+  );
+}
+
+.vignette-overlay {
+  background: var(--gradient-vignette-soft);
+}

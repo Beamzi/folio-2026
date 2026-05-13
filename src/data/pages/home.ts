@@ -4,8 +4,22 @@ export const homeContent = {
     title: "Projects I am excited to share",
     description:
       "A quick look at the work I am most proud of, plus smaller builds I keep shipping in between.",
+    uiLabels: {
+      openImageLabel: "Open full image",
+      closeImageLabel: "Close full image",
+    },
     featuredProject: {
       label: "Featured Project",
+      socialLinks: [
+        {
+          label: "View Orcha GitHub repository",
+          href: "https://github.com/Beamzi/orcha",
+        },
+        {
+          label: "Watch Orcha demo video",
+          href: "https://github-production-user-asset-6210df.s3.amazonaws.com/159420270/589411438-bf526a1c-0616-4748-b65c-71b2a90e0a05.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260513T011138Z&X-Amz-Expires=300&X-Amz-Signature=74402905f7ad1ca6d4ed17e6b8231d5eb4b9b2f7156430a60bff38968ccefffd&X-Amz-SignedHeaders=host&response-content-type=video%2Fmp4",
+        },
+      ],
       title: "Orcha",
       summary:
         "Orcha wraps locally-run AI models in the infrastructure they're missing. Persistent memory, context injection, live web search, and streaming responses — everything a frontier app offers, running entirely on your machine.",
@@ -13,62 +27,62 @@ export const homeContent = {
         {
           icon: "library",
           title: "Context Injection",
-          imagePath: "/globe.svg",
-          imageAlt: "Project library feature preview",
+          imagePath: "/images/orcha/context-injection-example.png",
+          imageAlt: "Orcha context injection feature preview",
           content: {
             title: "The foundation everything else builds on",
             summary:
               "Chat history is merged from server and client state, formatted to Ollama's spec, and injected into every request. The model knows what was said earlier in the conversation because you tell it — every time.",
             tags: ["Context Management", "State Architecture", "Ollama API"],
             href: "#",
-            ctaLabel: "View library feature",
+            ctaLabel: "Back to overview",
           },
         },
         {
           icon: "write",
           title: "Persistent Memory",
-          imagePath: "/file.svg",
-          imageAlt: "Case study editor feature preview",
+          imagePath: "/images/orcha/chat-instances--example.png",
+          imageAlt: "Orcha persistent memory chat instances preview",
           content: {
             title: "Conversations that survive the session",
             summary:
               "Chat instances are created atomically with their first message and saved to the database. History reloads into context on return so conversations stay coherent across sessions. Close the app, come back, pick up where you left off.",
             tags: ["PostgreSQL", "Prisma ORM", "Session Stat"],
             href: "#",
-            ctaLabel: "View editor feature",
+            ctaLabel: "Back to overview",
           },
         },
         {
           icon: "insights",
           title: "Live Data & Search",
-          imagePath: "/window.svg",
-          imageAlt: "Performance insights feature preview",
+          imagePath: "/images/orcha/web-search-example.png",
+          imageAlt: "Orcha live data and web search preview",
           content: {
             title: "Your local model, connected to now",
             summary:
               "Brave Search API pulls real-time results and injects them into model context before each response. Questions about recent events, things that happened last week — answered accurately by a model running entirely on your hardware.",
             tags: ["Brave Search API", "RAG", "Real-Time Data"],
             href: "#",
-            ctaLabel: "View insights feature",
+            ctaLabel: "Back to overview",
           },
         },
         {
           icon: "publish",
           title: "Streaming Response",
-          imagePath: "/vercel.svg",
-          imageAlt: "One-click publishing feature preview",
+          imagePath: "/images/orcha/streaming-example.png",
+          imageAlt: "Orcha streaming response preview",
           content: {
             title: "Output that feels instant",
             summary:
               "Responses stream token by token with optimistic UI updates. Temporary IDs allow state to update mid-stream and reconcile against the database on completion — without blocking the interface or waiting on the server.",
             tags: ["Streaming", "Optimistic UI", "State Reconciliatio"],
             href: "#",
-            ctaLabel: "View publishing feature",
+            ctaLabel: "Back to overview",
           },
         },
       ],
       href: "#",
-      ctaLabel: "View featured project",
+      ctaLabel: "View repository",
       tags: [
         "TypeScript",
         "React",
@@ -90,6 +104,9 @@ export const homeContent = {
         controls: {
           previousLabel: "Previous",
           nextLabel: "Next",
+          viewRepositoryLabel: "View repository",
+          backToOverviewLabel: "Back to overview",
+          repositoryHref: "https://github.com/Beamzi/orcha",
         },
         slides: [
           {

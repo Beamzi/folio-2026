@@ -47,8 +47,10 @@ export function MinorProjectsGrid() {
                     src={item.imagePath}
                     alt={item.imageAlt}
                     fill
-                    className="object-contain p-[var(--spacing-sm)]"
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover object-left"
                   />
+                  <div className="vignette-overlay pointer-events-none absolute inset-0" />
                 </div>
               </div>
             </div>
