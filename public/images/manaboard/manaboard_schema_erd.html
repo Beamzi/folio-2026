@@ -1,0 +1,221 @@
+<style>
+  html,
+  body {
+    margin: 0;
+    overflow: hidden;
+  }
+  #erd {
+    padding: 8px 0;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+  }
+  #erd.dragging {
+    cursor: grabbing;
+  }
+  #erd svg {
+    max-width: 100%;
+    transform-origin: top center;
+    transition: transform 120ms ease-out;
+    user-select: none;
+  }
+</style>
+<div id="erd"></div>
+<script type="module">
+  import mermaid from "https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs";
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  await document.fonts.ready;
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "base",
+    fontFamily: '"Anthropic Sans", sans-serif',
+    themeVariables: {
+      darkMode: dark,
+      fontSize: "13px",
+      fontFamily: '"Anthropic Sans", sans-serif',
+      lineColor: dark ? "#9c9a92" : "#73726c",
+      textColor: "#000000",
+      primaryTextColor: "#000000",
+      secondaryTextColor: "#000000",
+      tertiaryTextColor: "#000000",
+    },
+  });
+  const { svg } = await mermaid.render(
+    "erd-svg",
+    `erDiagram
+  User ||--o{ Project : owns
+  User ||--o{ Task : owns
+  User ||--o{ Comments : writes
+  User ||--o{ Account : has
+  User ||--o{ Session : has
+  Project ||--o{ Task : contains
+  Project ||--o{ Comments : receives
+
+  User {
+    string id PK
+    string name
+    string email
+    datetime createdAt
+  }
+  Project {
+    string id PK
+    string title
+    string description
+    string authorId FK
+  }
+  Task {
+    string id PK
+    string title
+    datetime date
+    boolean priority
+    string projectId FK
+    string authorId FK
+  }
+  Comments {
+    string id PK
+    string content
+    string projectId FK
+    string authorId FK
+    datetime createdAt
+  }
+  Account {
+    string userId FK
+    string provider
+    string providerAccountId
+  }
+  Session {
+    string sessionToken
+    string userId FK
+    datetime expires
+  }
+`,
+  );
+  document.getElementById("erd").innerHTML = svg;
+
+  document.querySelectorAll("#erd svg .node").forEach((node) => {
+    const firstPath = node.querySelector("path[d]");
+    if (!firstPath) return;
+    const d = firstPath.getAttribute("d");
+    const nums = d.match(/-?[\d.]+/g)?.map(Number);
+    if (!nums || nums.length < 8) return;
+    const xs = [nums[0], nums[2], nums[4], nums[6]];
+    const ys = [nums[1], nums[3], nums[5], nums[7]];
+    const x = Math.min(...xs),
+      y = Math.min(...ys);
+    const w = Math.max(...xs) - x,
+      h = Math.max(...ys) - y;
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", x);
+    rect.setAttribute("y", y);
+    rect.setAttribute("width", w);
+    rect.setAttribute("height", h);
+    rect.setAttribute("rx", "8");
+    for (const a of ["fill", "stroke", "stroke-width", "class", "style"]) {
+      if (firstPath.hasAttribute(a))
+        rect.setAttribute(a, firstPath.getAttribute(a));
+    }
+    firstPath.replaceWith(rect);
+  });
+
+  document
+    .querySelectorAll(
+      "#erd svg .row-rect-odd path, #erd svg .row-rect-even path",
+    )
+    .forEach((p) => {
+      p.setAttribute("stroke", "none");
+    });
+
+  const erdContainer = document.getElementById("erd");
+  const erdSvg = erdContainer?.querySelector("svg");
+  let translateX = 0;
+  let translateY = 0;
+  let scale = 1;
+  const minScale = 0.75;
+  const maxScale = 2.25;
+  const minTranslateX = -220;
+  const maxTranslateX = 220;
+  const minTranslateY = -220;
+  const maxTranslateY = 80;
+  let isDragging = false;
+  let lastPointerX = 0;
+  let lastPointerY = 0;
+
+  const applyTranslate = () => {
+    if (!erdSvg) return;
+    erdSvg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+  };
+
+  const clampTranslate = () => {
+    translateX = Math.min(maxTranslateX, Math.max(minTranslateX, translateX));
+    translateY = Math.min(maxTranslateY, Math.max(minTranslateY, translateY));
+  };
+
+  const clampScale = () => {
+    scale = Math.min(maxScale, Math.max(minScale, scale));
+  };
+
+  const handleWheel = (event) => {
+    if (!erdSvg) return;
+    event.preventDefault();
+    const lineHeightPx = 16;
+    const pageHeightPx = window.innerHeight;
+    const deltaScale =
+      event.deltaMode === 1 ? lineHeightPx : event.deltaMode === 2 ? pageHeightPx : 1;
+    let deltaX = event.deltaX * deltaScale;
+    let deltaY = event.deltaY * deltaScale;
+
+    // Shift+wheel often represents horizontal intent on some devices.
+    if (event.shiftKey && deltaX === 0) {
+      deltaX = deltaY;
+      deltaY = 0;
+    }
+
+    // Wheel/trackpad is zoom-only; click+drag handles panning.
+    const zoomSensitivity = 0.0015;
+    const zoomDelta = Math.abs(deltaY) >= Math.abs(deltaX) ? deltaY : deltaX;
+    scale *= 1 - zoomDelta * zoomSensitivity;
+    clampScale();
+    applyTranslate();
+  };
+
+  const handlePointerDown = (event) => {
+    if (!erdSvg || event.button !== 0) return;
+    event.preventDefault();
+    isDragging = true;
+    erdContainer?.classList.add("dragging");
+    lastPointerX = event.clientX;
+    lastPointerY = event.clientY;
+  };
+
+  const handlePointerMove = (event) => {
+    if (!erdSvg || !isDragging) return;
+    const deltaX = event.clientX - lastPointerX;
+    const deltaY = event.clientY - lastPointerY;
+    lastPointerX = event.clientX;
+    lastPointerY = event.clientY;
+    translateX += deltaX;
+    translateY += deltaY;
+    clampTranslate();
+    applyTranslate();
+  };
+
+  const endDrag = () => {
+    isDragging = false;
+    erdContainer?.classList.remove("dragging");
+  };
+
+  erdContainer?.addEventListener("pointerdown", handlePointerDown);
+  window.addEventListener("pointermove", handlePointerMove);
+  window.addEventListener("pointerup", endDrag);
+  window.addEventListener("pointercancel", endDrag);
+
+  erdContainer?.addEventListener("wheel", handleWheel, {
+    passive: false,
+    capture: true,
+  });
+
+  document.addEventListener("wheel", handleWheel, {
+    passive: false,
+    capture: true,
+  });
+</script>

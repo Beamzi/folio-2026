@@ -52,7 +52,7 @@ export function FeaturedProjectSection() {
           <span className="inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--color-primary)]">
             {featuredProject.label}
           </span>
-          <span className="inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)]">
+          <span className="inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--color-primary)]    ">
             {featuredProject.title}
           </span>
         </div>

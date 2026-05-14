@@ -44,28 +44,28 @@ export function ProjectCtaButton(props: ProjectCtaButtonProps) {
     </>
   );
 
-  if ("href" in props) {
+  if ("onClick" in props) {
     return (
-      <Link
-        href={props.href}
+      <button
+        type="button"
+        onClick={props.onClick}
         aria-label={ariaLabel}
         className={combinedClassName}
-        target={props.external ? "_blank" : undefined}
-        rel={props.external ? "noopener noreferrer" : undefined}
       >
         {content}
-      </Link>
+      </button>
     );
   }
 
   return (
-    <button
-      type="button"
-      onClick={props.onClick}
+    <Link
+      href={props.href}
       aria-label={ariaLabel}
       className={combinedClassName}
+      target={props.external ? "_blank" : undefined}
+      rel={props.external ? "noopener noreferrer" : undefined}
     >
       {content}
-    </button>
+    </Link>
   );
 }

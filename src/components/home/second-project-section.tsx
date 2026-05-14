@@ -5,16 +5,21 @@ import { useState } from "react";
 import {
   LuArrowLeft,
   LuBookOpen,
+  LuBox,
   LuChartBar,
+  LuCodesandbox,
   LuFilePenLine,
   LuGithub,
+  LuLayers2,
+  LuNetwork,
   LuRocket,
+  LuRoute,
 } from "react-icons/lu";
 import { ImagePreviewModal } from "@/components/home/image-preview-modal";
 import { ProjectCtaButton } from "@/components/home/project-cta-button";
 import { homeContent } from "@/data/pages/home";
 
-const secondProjectViewIcons = [LuBookOpen, LuChartBar, LuFilePenLine, LuRocket] as const;
+const secondProjectViewIcons = [LuBox, LuLayers2, LuRoute, LuNetwork] as const;
 
 export function SecondProjectSection() {
   const { secondProject, uiLabels } = homeContent.featuresSection;
@@ -22,6 +27,7 @@ export function SecondProjectSection() {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const slides = secondProject.carousel.slides;
   const activeSlide = slides[activeSlideIndex];
+  const isHtmlSlide = activeSlide.imagePath.endsWith(".html");
   const ActiveViewIcon = secondProjectViewIcons[activeSlideIndex] ?? LuRocket;
   const slideCountLabel = `${activeSlideIndex + 1}/${slides.length}`;
 
@@ -112,29 +118,43 @@ export function SecondProjectSection() {
             />
           )}
         </div>
-        <button
-          type="button"
-          onClick={() => setIsPreviewOpen(true)}
-          aria-label={uiLabels.openImageLabel}
-          className="relative h-[calc(var(--feature-card-min-height)*1.25)] flex-1 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] md:h-auto"
-        >
-          <Image
-            src={activeSlide.imagePath}
-            alt={activeSlide.imageAlt}
-            fill
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover object-left"
-          />
-          <div className="vignette-overlay pointer-events-none absolute inset-0" />
-        </button>
+        {isHtmlSlide ? (
+          <div className="relative h-[calc(var(--feature-card-min-height)*1.25)] flex-1 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] md:h-auto">
+            <iframe
+              src={activeSlide.imagePath}
+              title={activeSlide.imageAlt}
+              className="h-full w-full border-0"
+              loading="lazy"
+            />
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setIsPreviewOpen(true)}
+            aria-label={uiLabels.openImageLabel}
+            className="relative h-[calc(var(--feature-card-min-height)*1.25)] flex-1 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] md:h-auto"
+          >
+            <Image
+              src={activeSlide.imagePath}
+              alt={activeSlide.imageAlt}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              loading={activeSlideIndex === 0 ? "eager" : "lazy"}
+              className="object-cover object-left"
+            />
+            <div className="vignette-overlay pointer-events-none absolute inset-0" />
+          </button>
+        )}
       </div>
-      <ImagePreviewModal
-        isOpen={isPreviewOpen}
-        imagePath={activeSlide.imagePath}
-        imageAlt={activeSlide.imageAlt}
-        closeLabel={uiLabels.closeImageLabel}
-        onClose={() => setIsPreviewOpen(false)}
-      />
+      {!isHtmlSlide ? (
+        <ImagePreviewModal
+          isOpen={isPreviewOpen}
+          imagePath={activeSlide.imagePath}
+          imageAlt={activeSlide.imageAlt}
+          closeLabel={uiLabels.closeImageLabel}
+          onClose={() => setIsPreviewOpen(false)}
+        />
+      ) : null}
     </article>
   );
 }
