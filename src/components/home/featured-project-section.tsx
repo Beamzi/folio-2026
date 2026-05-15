@@ -53,7 +53,7 @@ export function FeaturedProjectSection() {
             {featuredProject.label}
           </span>
           <span className="inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--color-primary)]    ">
-            {featuredProject.title}
+            {featuredProject.projectTitle}
           </span>
         </div>
         <div className="flex items-center gap-[var(--spacing-xs)]">
@@ -198,7 +198,7 @@ export function FeaturedProjectSection() {
         ) : (
           <div className="flex h-full flex-col rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-sm)]">
             <h3 className="mb-[var(--spacing-xs)] font-semibold text-[var(--foreground)]">
-              {featuredProject.title}
+              {featuredProject.descriptionTitle}
             </h3>
             <p className={summaryClassName}>{featuredProject.summary}</p>
             <ul className="mb-[var(--spacing-sm)] flex flex-wrap gap-[var(--spacing-xs)]">

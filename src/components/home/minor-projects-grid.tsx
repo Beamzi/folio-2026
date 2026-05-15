@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import { homeContent } from "@/data/pages/home";
 
 export function MinorProjectsGrid() {
@@ -15,9 +13,11 @@ export function MinorProjectsGrid() {
       </p>
       <div className="grid gap-[var(--spacing-sm)] md:grid-cols-3">
         {minorProjects.items.map((item) => (
-          <Link
+          <a
             href={item.href}
             key={item.title}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative block overflow-hidden rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
           >
             <div className="relative z-0">
@@ -35,7 +35,7 @@ export function MinorProjectsGrid() {
                 ))}
               </ul>
             </div>
-            <div className="pointer-events-none absolute inset-0 z-10 translate-x-full border-l-[var(--border)] border-[var(--color-border)] bg-[var(--background-elevated)] transition-transform duration-300 ease-out group-hover:translate-x-0 group-focus-visible:translate-x-0">
+            <div className="absolute inset-0 z-10 translate-x-[calc(100%+1px)] border-l-[var(--border)] border-[var(--color-border)] bg-[var(--background-elevated)] transition-transform duration-300 ease-out group-hover:translate-x-0 group-focus-visible:translate-x-0">
               <div className="flex h-full flex-col">
                 <div className="border-b-[var(--border)] border-[var(--color-border)] px-[var(--spacing-sm)] py-[var(--spacing-xs)]">
                   <p className="font-semibold text-[var(--foreground)]">
@@ -43,18 +43,18 @@ export function MinorProjectsGrid() {
                   </p>
                 </div>
                 <div className="relative flex-1">
-                  <Image
+                  <img
                     src={item.imagePath}
                     alt={item.imageAlt}
-                    fill
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    className="object-cover object-left"
+                    loading="lazy"
+                    draggable={false}
+                    className="h-full w-full object-cover object-center"
                   />
                   <div className="vignette-overlay pointer-events-none absolute inset-0" />
                 </div>
               </div>
             </div>
-          </Link>
+          </a>
         ))}
       </div>
     </div>

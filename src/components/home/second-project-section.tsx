@@ -45,14 +45,19 @@ export function SecondProjectSection() {
 
   return (
     <article className="flex flex-col gap-[var(--spacing-md)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)]">
-      <div className="flex items-center justify-between gap-[var(--spacing-sm)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-xs)]">
-        <button
-          type="button"
-          aria-label={activeSlide.navLabel}
-          className="rounded-[var(--radius-sm)] border border-[var(--color-border)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)]"
-        >
-          {activeSlide.navLabel}
-        </button>
+      <div className="flex items-center justify-between gap-[var(--spacing-sm)] rounded-[var(--radius-md)] bg-[var(--background-elevated)]">
+        <div className="flex items-center gap-[var(--spacing-xs)]">
+          <span className="rounded-[var(--radius-sm)] border border-[var(--color-border)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--color-primary)]">
+            {secondProject.projectTitle}
+          </span>
+          <button
+            type="button"
+            aria-label={activeSlide.navLabel}
+            className="rounded-[var(--radius-sm)] border border-[var(--color-border)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)]"
+          >
+            {activeSlide.navLabel}
+          </button>
+        </div>
         <div className="flex items-center gap-[var(--spacing-xs)]">
           <button
             type="button"
@@ -86,7 +91,7 @@ export function SecondProjectSection() {
             </span>
           </div>
           <h4 className="mb-[var(--spacing-xs)] font-semibold text-[var(--foreground)]">
-            {activeSlide.title}
+            {activeSlideIndex === 0 ? secondProject.descriptionTitle : activeSlide.title}
           </h4>
           <p className="mb-[var(--spacing-sm)] text-[var(--foreground)]">
             {activeSlide.summary}

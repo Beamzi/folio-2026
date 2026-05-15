@@ -1,9 +1,8 @@
 export const homeContent = {
   featuresSection: {
     eyebrow: "Selected Work",
-    title: "Projects I am excited to share",
-    description:
-      "A quick look at the work I am most proud of, plus smaller builds I keep shipping in between.",
+    title: "Manaboard",
+    description: "",
     uiLabels: {
       openImageLabel: "Open full image",
       closeImageLabel: "Close full image",
@@ -20,9 +19,11 @@ export const homeContent = {
           href: "https://github-production-user-asset-6210df.s3.amazonaws.com/159420270/589411438-bf526a1c-0616-4748-b65c-71b2a90e0a05.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260513T011138Z&X-Amz-Expires=300&X-Amz-Signature=74402905f7ad1ca6d4ed17e6b8231d5eb4b9b2f7156430a60bff38968ccefffd&X-Amz-SignedHeaders=host&response-content-type=video%2Fmp4",
         },
       ],
-      title: "Orcha",
+      projectTitle: "Orcha",
+      descriptionTitle:
+        "Orcha - local AI infrastructure, yours to own and run.",
       summary:
-        "Orcha wraps locally-run AI models in the infrastructure they're missing. Persistent memory, context injection, live web search, and streaming responses — everything a frontier app offers, running entirely on your machine.",
+        "Orcha wraps locally-run AI models in the infrastructure they're missing. Persistent memory, context injection, live web search, and streaming responses; everything a frontier app offers, running entirely on your machine.",
       featureFlow: [
         {
           icon: "library",
@@ -32,7 +33,7 @@ export const homeContent = {
           content: {
             title: "The foundation everything else builds on",
             summary:
-              "Chat history is merged from server and client state, formatted to Ollama's spec, and injected into every request. The model knows what was said earlier in the conversation because you tell it — every time.",
+              "Chat history is merged from server and client state, formatted to Ollama's spec, and injected into every request. The model knows what was said earlier in the conversation because you tell it - every time.",
             tags: ["Context Management", "State Architecture", "Ollama API"],
             href: "#",
             ctaLabel: "Back to overview",
@@ -74,7 +75,7 @@ export const homeContent = {
           content: {
             title: "Output that feels instant",
             summary:
-              "Responses stream token by token with optimistic UI updates. Temporary IDs allow state to update mid-stream and reconcile against the database on completion — without blocking the interface or waiting on the server.",
+              "Responses stream token by token with optimistic UI updates. Temporary IDs allow state to update mid-stream and reconcile against the database on completion; without blocking the interface or waiting on the server.",
             tags: ["Streaming", "Optimistic UI", "State Reconciliatio"],
             href: "#",
             ctaLabel: "Back to overview",
@@ -94,7 +95,8 @@ export const homeContent = {
     },
     secondProject: {
       label: "Second Project",
-      title: "Client Dashboard Redesign",
+      projectTitle: "Manaboard",
+      descriptionTitle: "Manaboard - Built for speed, feels instant",
       summary:
         "A performance-focused redesign that made project tracking faster and clearer across mobile, tablet, and desktop.",
       href: "#",
@@ -111,7 +113,7 @@ export const homeContent = {
         slides: [
           {
             navLabel: "Overview",
-            title: "Manaboard",
+            title: "Manaboard - Built for speed, feels instant",
             summary:
               "Manaboard is a full-stack project management platform built around one principle: every interaction feels instant. ~50ms route transitions, zero loading states, fuzzy search, and a custom state architecture built from scratch; production standard throughout.",
             imagePath: "/images/manaboard/overview.jpg",
@@ -124,7 +126,7 @@ export const homeContent = {
             navLabel: "Synchronisation",
             title: "Instant By Design",
             summary:
-              "State lives in memory, populated at load via SSR. Filtering, sorting, and navigation are pure client-side operations — no API calls, no loading states. Changes sync to the backend in the background while the UI responds immediately.",
+              "State lives in memory, populated at load via SSR. Filtering, sorting, and navigation are pure client-side operations; no API calls, no loading states. Changes sync to the backend in the background while the UI responds immediately.",
             imagePath: "/images/manaboard/hydration.jpg",
             imageAlt: "Manaboard hydration view",
             href: "#",
@@ -162,60 +164,96 @@ export const homeContent = {
         "Smaller experiments, utility apps, and focused client builds that solve practical problems.",
       items: [
         {
-          title: "Habit Heatmap",
+          title: "Navicube",
           summary:
-            "A streak tracker with daily check-ins and lightweight progress trends.",
+            "An immersive 3D navigation UX experiment built to showcase advanced frontend techniques through interactive scene interaction and smooth animations.",
           bulletPoints: [
-            "Daily streak check-ins",
-            "Weekly progress snapshots",
-            "Lightweight habit categories",
+            "Fully interactive 3D scene with smooth camera navigation",
+            "Custom reusable components and modular UI architecture",
+            "Immersive animations built with Framer Motion",
+            "Performance-optimised for fast load times and responsive design",
           ],
-          imagePath: "/window.svg",
-          imageAlt: "Habit Heatmap project preview",
-          href: "#",
-          ctaLabel: "Open project",
+          imagePath: "/images/minor-projects/navcube-2.jpg",
+          imageAlt: "3D Portfolio Experience project preview",
+          href: "https://github.com/Beamzi/folio-site",
+          ctaLabel: "Visit Repository",
         },
         {
-          title: "Freelance Invoice Helper",
+          title: "HPG Sheds & Patios",
           summary:
-            "A simple invoicing assistant with tax presets and downloadable PDFs.",
+            "A client website for a shed and patio builder, featuring an interactive 3D shed configurator and an animated multi-step process section.",
           bulletPoints: [
-            "Invoice templates by client",
-            "Tax preset calculators",
-            "Exportable PDF invoices",
+            "Interactive 3D shed designer with instant quoting",
+            "Animated process section with IntersectionObserver step cycling",
+            "Modular data-driven architecture across pages and sections",
+            "Responsive design with dark mode toggle and performance-optimised layout",
           ],
-          imagePath: "/file.svg",
-          imageAlt: "Freelance Invoice Helper project preview",
-          href: "#",
-          ctaLabel: "Open project",
+          imagePath:
+            "/images/minor-projects/hpg-sheds-patios-screen-concept-1.jpg",
+          imageAlt: "HPG Sheds & Patios project preview",
+          href: "https://www.hpgsheds.com.au/",
+          ctaLabel: "Visit Repository",
+        },
+
+        {
+          title: "The Disability Housing Centre",
+          summary:
+            "A client website for an SDA housing service, rebuilt for modernity and accessibility with custom JS and CSS layered over existing WordPress systems.",
+          bulletPoints: [
+            "Custom scroll behaviour and viewport interactions via a config object system",
+            "Stateful header with differing styles and transitions per route",
+            "Retrofit styles and interactions over an in-use search filter plugin",
+            "Masonry overlays with clickthrough filtering to meet client requirements",
+          ],
+          imagePath: "/images/minor-projects/DHS-1.jpg",
+          imageAlt: "The Disability Housing Centre homepage",
+          href: "https://thedisabilityhousingcentre.com.au/",
+          ctaLabel: "Visit Repository",
         },
         {
-          title: "Recipe Snapshot",
+          title: "Daymedia",
           summary:
-            "A compact recipe organizer for storing favorites and quick grocery prep lists.",
+            "A client website for a Brisbane web agency, built with a focus on motion design and Lottie API integration.",
           bulletPoints: [
-            "Favorite recipe collections",
-            "Quick ingredient checklists",
-            "Fast meal prep notes",
+            "Lottie animations with hover speed control and click-based direction reversal",
+            "Scroll-triggered header transitions for adaptive navigation",
+            "Animated gradient backgrounds and hue-rotation effects for visual depth",
+            "Motion-rich hover interactions using CSS transforms and keyframes",
           ],
-          imagePath: "/globe.svg",
-          imageAlt: "Recipe Snapshot project preview",
-          href: "#",
-          ctaLabel: "Open project",
+          imagePath: "/images/minor-projects/daymedia-1.jpg",
+          imageAlt: "Daymedia homepage animation",
+          href: "https://daymedia.com.au/",
+          ctaLabel: "Visit Repository",
         },
         {
-          title: "Mini Event Site",
+          title: "Mt Cotton Retreat",
           summary:
-            "A launch-ready event template with schedule blocks, speaker highlights, and sign-up CTAs.",
+            "A client website for a 4-star Brisbane retreat, focused on guiding visitors through rooms and services to their respective booking actions.",
           bulletPoints: [
-            "Speaker highlight modules",
-            "Session schedule blocks",
-            "Sign-up call-to-action flow",
+            "Embedded booking integration synchronised with Booking.com and other platforms",
+            "Specialised frontend design showcasing each room and booking type",
+            "CMS setup for client content management",
+            "Extensive SEO work contributing to strong organic site traffic",
           ],
-          imagePath: "/next.svg",
-          imageAlt: "Mini Event Site project preview",
-          href: "#",
-          ctaLabel: "Open project",
+          imagePath: "/images/minor-projects/mtcotton-1.jpg",
+          imageAlt: "Mt Cotton Retreat homepage",
+          href: "https://mtcottonretreat.com/",
+          ctaLabel: "Visit Site",
+        },
+        {
+          title: "Jamie Lane (Artist)",
+          summary:
+            "A client promo site for a signed musician's album release, built with a focus on branding, multimedia, and load performance.",
+          bulletPoints: [
+            "Custom graphic design and online branding",
+            "Multimedia video and graphics editing optimised for web",
+            "CMS setup for client content management",
+            "Lightweight build prioritising loading speed and SEO",
+          ],
+          imagePath: "/images/minor-projects/jamielane.jpg",
+          imageAlt: "Jamie Lane Pleroma album site",
+          href: "https://jamielane.net/",
+          ctaLabel: "Visit Site",
         },
       ],
     },
