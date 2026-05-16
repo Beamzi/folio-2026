@@ -89,10 +89,23 @@
 }
 
 body {
-  background: var(--background);
+  background-color: transparent;
   color: var(--foreground);
   font-family: var(--font-primary), Arial, Helvetica, sans-serif;
   overflow-x: clip;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--background);
+  background-image: url("/images/background/bg-3.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 html {

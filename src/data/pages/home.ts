@@ -87,10 +87,11 @@ export const homeContent = {
       tags: [
         "TypeScript",
         "React",
-        "Tailwind",
         "Next.js",
         "Prisma",
         "PostgreSQL",
+        "Brave API",
+        "Ollama API",
       ],
     },
     secondProject: {
