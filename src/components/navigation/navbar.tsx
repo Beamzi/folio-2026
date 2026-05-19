@@ -1,17 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { navigationContent } from "@/data/navigation";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const scrollToSection = (sectionId: string) => {
+    if (sectionId === "page-bottom") {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+      return;
+    }
+
+    const targetElement = document.getElementById(sectionId);
+    if (!targetElement) {
+      return;
+    }
+
+    const headerElement = document.querySelector("header");
+    const headerHeight =
+      headerElement instanceof HTMLElement ? headerElement.offsetHeight : 0;
+    const sectionTop =
+      targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+    window.scrollTo({
+      top: Math.max(0, sectionTop),
+      behavior: "smooth",
+    });
+  };
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    setIsMenuOpen(false);
+
+    if (window.location.pathname !== "/") {
+      return;
+    }
+
+    const [pathnamePart, hashPart] = href.split("#");
+    if (pathnamePart !== "/") {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (!hashPart) {
+      window.history.replaceState(null, "", "/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    window.history.replaceState(null, "", `/#${hashPart}`);
+    scrollToSection(hashPart);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b-[var(--border)] bg-[var(--background-elevated)]">
       <div className="mx-auto flex h-[var(--navbar-height)] w-full max-w-[var(--content-max-width)] items-center justify-between gap-[var(--spacing-sm)] px-[var(--spacing-sm)]">
         <Link
           href={navigationContent.brand.href}
+          onClick={(event) => handleNavClick(event, navigationContent.brand.href)}
           className="rounded-[var(--radius-sm)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)] transition-colors hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
         >
           {navigationContent.brand.label}
@@ -66,6 +117,7 @@ export function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  onClick={(event) => handleNavClick(event, link.href)}
                   className="rounded-[var(--radius-sm)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)] transition-colors hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
                 >
                   {link.label}
@@ -86,8 +138,8 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
+                onClick={(event) => handleNavClick(event, link.href)}
                 className="block rounded-[var(--radius-sm)] px-[var(--spacing-xs)] py-[var(--spacing-xs)] text-[var(--foreground)] transition-colors hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
-                onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
               </Link>

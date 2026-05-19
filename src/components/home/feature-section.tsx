@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { AboutSection } from "@/components/home/about-section";
 import { ContactSection } from "@/components/home/contact-section";
 import { FeaturedProjectSection } from "@/components/home/featured-project-section";
 import { MinorProjectsGrid } from "@/components/home/minor-projects-grid";
@@ -91,9 +92,19 @@ export function FeatureSection() {
               parallaxRefs.current[2] = element;
             }}
             className="will-change-transform"
+            id="about"
+          >
+            <AboutSection />
+          </div>
+          <div
+            ref={(element) => {
+              parallaxRefs.current[3] = element;
+            }}
+            className="will-change-transform"
           >
             <ContactSection />
           </div>
+          <div id="page-bottom" className="h-px w-full" aria-hidden="true" />
         </div>
       </div>
     </section>

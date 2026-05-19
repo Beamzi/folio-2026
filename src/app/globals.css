@@ -7,7 +7,7 @@
   --foreground: #171717;
 
   /* Colors */
-  --color-primary: #a1bf36;
+  --color-primary: #fe853e;
   --color-secondary: #1261a6;
   --color-muted: #737373;
   --color-border: #e5e7eb;
@@ -102,7 +102,7 @@ body::before {
   inset: 0;
   z-index: -1;
   background-color: var(--background);
-  background-image: url("/images/background/bg-3.jpg");
+  background-image: url("/images/background/bg-6.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

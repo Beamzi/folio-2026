@@ -258,39 +258,49 @@ export const homeContent = {
         },
       ],
     },
+    aboutSection: {
+      profileImage: {
+        path: "/images/background/bg-5.jpg",
+        alt: "James Day profile photo",
+      },
+      name: "James Day",
+      title: "Software Engineer - AI Infrastructure & Fullstack",
+      bio: "I'm a full-stack engineer based in Brisbane, focused on building AI-integrated systems — specifically the infrastructure that makes AI applications stateful, context-aware, and production-ready. I've been shipping client work since 2021 and recently turned my focus toward the harder problems: orchestrating context, managing inference state, and designing systems that treat AI as a first-class architectural concern rather than an API call. \n\n Before software I studied music at QUT, which probably explains why I care about structure and timing as much as I do.",
+      stackTags: [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Node.js",
+        "PostgreSQL",
+        "Prisma",
+        "AI Infrastructure",
+      ],
+      status:
+        "Open to roles at early-stage startups and small engineering teams.",
+    },
     contactSection: {
       label: "Contact",
-      title: "James Day",
-      subtitle: "Let’s connect",
-      details: [
-        {
-          label: "Location",
-          icon: "mapPin",
-          value: "Brisbane, QLD",
-        },
-        {
-          label: "Phone",
-          icon: "phone",
-          value: "+61 491 625 139",
-          href: "tel:+61491625139",
-        },
-        {
-          label: "Email",
-          icon: "mail",
-          value: "me@james-day.dev",
-          href: "mailto:me@james-day.dev",
-        },
-        {
-          label: "Website",
-          icon: "globe",
-          value: "james-day.dev",
-          href: "https://james-day.dev",
-        },
+      oneLiner:
+        "Brisbane-based developer building fast, thoughtful web products.",
+      email: {
+        label: "me@james-day.dev",
+        href: "mailto:me@james-day.dev",
+      },
+      actions: [
         {
           label: "GitHub",
           icon: "github",
-          value: "github.com/beamzi/",
           href: "https://github.com/beamzi",
+        },
+        {
+          label: "Resume",
+          icon: "resume",
+          href: "#",
+        },
+        {
+          label: "+61 491 625 139",
+          icon: "phone",
+          href: "tel:+61491625139",
         },
       ],
     },

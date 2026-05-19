@@ -1,6 +1,6 @@
 export const navigationContent = {
   brand: {
-    label: "Portfolio",
+    label: "James Day",
     href: "/",
   },
   ariaLabel: "Primary navigation",
@@ -9,8 +9,8 @@ export const navigationContent = {
     closeLabel: "Close navigation menu",
   },
   links: [
-    { label: "About", href: "#about" },
-    { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
+    { label: "About", href: "/#about" },
+    { label: "Projects", href: "/" },
+    { label: "Contact", href: "/#page-bottom" },
   ],
 };
